@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../../static/css/star.css">
+<script type="text/javascript">
+    var nowindex = 0;//默认几个星
+    var startnum = 5;//星的个数
+    var selectedcolor = "red";//选上的颜色
+    var uselectedcolor = "gray";    //未选的颜色
+    function _$(id) { return document.getElementById(id); }
+    function setstar(index) {
+        for(var i=1;i<=index;i++){
+            _$("s"+i).style.color=selectedcolor;
+            _$("s"+i).style.cursor="hand";
+        }
+        for(var i=(index+1);i<=startnum;i++){ _$("s"+i).style.color=uselectedcolor;
+            _$("s"+i).style.cursor="hand";
+        }
+    }
+    function initstar() {
+        for(var i=1;i<=startnum;i++) {
+            document.write('<span id="s'+i+'" title="'+i+'星"  onmouseover="setstar('+i+')">★</span>');
+        } setstar(nowindex)
+    }
+</script>
+<body>
+    <div style="font-size:80pt;"> <script type="text/javascript">  initstar() </script> </div>
+</body>
+</html>

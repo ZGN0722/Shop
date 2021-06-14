@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <base th:href="@{/}"><!-- 不用base就使用th:src="@{/js/jquery.min.js} -->
+  <meta charset="UTF-8">
+  <title>商家认证页面</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <script src="js/jquery.min.js"></script>
+  <script src="js/common.js"></script>
+  <script type="text/javascript" th:inline="javascript">
+    function check(){
+      alert("已发起认证请求，等待管理员处理");
+      document.myform.submit();
+    }
+  </script>
+<body>
+<div class="container">
+  <div class="bg-primary"  style="width:70%; height: 60px;padding-top: 1px;">
+    <h3 align="center">商家认证</h3>
+  </div>
+  <div  style="width:70%; height: 20px;padding-top: 5px; color:#D2691E">
+    <h5 align="center" >您还未是商家，完成认证才能卖商品</h5>
+  </div>
+  <br><br>
+  <form th:action="@{/store/register}"
+        name="myform" method="post"
+        th:object="${store}"
+        class="form-horizontal"
+        enctype="multipart/form-data" >
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">商店名称</label>
+      <div class="col-sm-4 col-md-4">
+        <input type="text" class="form-control"
+               placeholder="请输入商品名"
+               th:field="*{sname}"/>
+      </div>
+    </div>
+      <div class="form-group has-success">
+        <label class="col-sm-2 col-md-2 control-label">营业执照</label>
+        <div class="col-sm-4 col-md-4">
+          <input type="file" placeholder="请选择营业执照"  class="form-control" name="fileName1"/>
+        </div>
+      </div>
+
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">身份证件照</label>
+      <div class="col-sm-4 col-md-4">
+        <input type="file" placeholder="请选择身份证件照"  class="form-control" name="fileName2"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit"class="btn btn-success" onclick="check()">添加</button>
+        <button type="reset" class="btn btn-primary" >重置</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

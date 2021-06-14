@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.ebusiness.repository.before.UserRepository">
+	<select id="isUse" parameterType="BUser" resultType="BUser">
+		select * from busertable where login_name = #{login_name}
+	</select>
+	<insert id="register" parameterType="BUser">
+		insert into busertable (id, login_name, bpwd, gender, credit_card, email, mobile, user_name, wallet, score)  values(null, #{login_name}, #{bpwd}, #{gender}, #{credit_card}, #{email}, #{mobile}, #{user_name}, 0, 0)
+	</insert>
+	<select id="login" parameterType="BUser" resultType="BUser">
+		select * from busertable where login_name = #{login_name} and bpwd = #{bpwd}
+	</select>
+	<select id="updateBUser" parameterType="Integer" resultType="BUser">
+		select * from busertable where id =#{uid}
+	</select>
+	<!-- 充值 -->
+	<update id="updateRecharge">
+		update busertable set wallet=wallet+500 where id=#{uid}
+	</update>
+	<update id="updateScore">
+		update busertable set score = score + #{amount} where id=#{uid}
+	</update>
+	<insert id="insertEva">
+		insert into evaluation (id, grating, goodsEva, srating, storeEva, goodstable_id, store_id, buser_id)  values(null, #{grating}, #{goodsEva}, #{srating}, #{storeEva}, #{id}, #{sid}, #{buser_id})
+	</insert>
+	<select id="store" resultType="java.util.Map">
+		select st.*,gt.gname,gt.gpicture from goodstable gt, storetable st where gt.id =#{id} and gt.store_id=st.id
+	</select>
+	<select id="getSid" resultType="Integer">
+		select store_id from goodstable where id=#{id}
+	</select>
+</mapper>

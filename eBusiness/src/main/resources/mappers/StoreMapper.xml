@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.ebusiness.repository.store.StoreRepository">
+    <insert id="register" parameterType="Store">
+        insert into storetable (id,sname,slevef,spicture,cpicture,buser_id)
+        values (null, #{sname}, 1,#{spicture}, #{cpicture}, #{buser_id})
+    </insert>
+
+    <select id="selectInfo" parameterType="integer" resultType="com.ch.ebusiness.entity.Store">
+        select * from storetable where buser_id=#{buser_id}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="selectMyGoodsByPage"  resultType="com.ch.ebusiness.entity.Goods">
+        select gt.*,gy.typename
+        from goodstable gt,goodstype gy
+        where gt.goodstype_id = gy.id and store_id=#{store_id}
+        order by id desc limit #{startIndex}, #{perPageSize}
+    </select>
+
+    <select id="selectMyGoods"  resultType="integer">
+        select count(*) from goodstable where store_id=#{store_id}
+    </select>
+    <select id="selectAllOrder"  resultType="integer">
+        select count(*) from orderdetail rd,goodstable gs where rd.goodstable_id = gs.id and store_id=#{store_id}
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="selectOrderByPage"  resultType="map">
+        select rd.*, gs.*, obt.* from orderdetail rd,goodstable gs, orderbasetable obt where rd.goodstable_id = gs.id and gs.store_id=#{store_id} and obt.id=rd.orderbasetable_id limit #{startIndex}, #{perPageSize}
+    </select>
+
+    <select id="isStore" parameterType="integer" resultType="com.ch.ebusiness.entity.Store">
+        select * from storetable where buser_id = #{uid}
+    </select>
+    <select id="selectEva"  resultType="Eva">
+        select
+            *
+        from
+            evaluation
+        where
+            store_id = #{id}
+    </select>
+</mapper>

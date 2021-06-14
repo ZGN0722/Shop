@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>商家信息页面</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<body>
+<div th:include="store/header"></div>
+<br><br><br>
+<div class="container">
+  <div class="bg-primary"  style="width:70%; height: 60px;padding-top: 0.5px;">
+    <h3 align="center">商家信息</h3>
+  </div><br>
+  <form th:action="@{/store/storeInfo}"
+        name="myform" method="post"
+        class="form-horizontal"
+        enctype="multipart/form-data" >
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">商家名称</label>
+      <div class="col-sm-4 col-md-4">
+        <input type="text" class="form-control"
+               placeholder="请输入商品名"
+               th:value="${session.store.sname}"/>
+      </div>
+    </div>
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">商家等级</label>
+      <div class="col-sm-4 col-md-4">
+        <input type="number" class="form-control"
+               readonly="readonly"
+               th:value="${session.store.slevef}"/>
+      </div>
+    </div>
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">营业执照</label>
+      <div class="col-sm-4 col-md-4">
+        <img
+                th:src="'images/' + ${session.store.spicture}"
+                style="height: 110px; width: 140px; display: block;">
+      </div>
+    </div>
+    <div class="form-group has-success">
+      <label class="col-sm-2 col-md-2 control-label">身份证照</label>
+      <div class="col-sm-4 col-md-4">
+        <img
+                th:src="'images/' + ${session.store.cpicture}"
+                style="height: 110px; width: 140px; display: block;">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit"class="btn btn-success" >修改</button>
+        <button type="reset" class="btn btn-primary" >重置</button>
+      </div>
+    </div>
+      <div class="bg-primary"  style="width:70%; height: 40px;padding-top: 0.5px;">
+          <h4 align="center">商家评价</h4>
+      </div><br>
+    <div class="row">
+      <div class="col-xs-6 col-md-10" th:each="eva:${evaluation}">
+        <div class="caption">
+          <div class="col-xs-6 col-md-1">
+            <img src="images/202105148102518066.jpg"
+                 style="height: 50px; width: 50px; display: block;"/>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <p><span style="color: yellow;">
+							<span th:if="${eva.grating} == 5" >
+									★★★★★
+							</span>
+							<span th:if="${eva.grating} == 4" >
+									★★★★
+							</span>
+							<span th:if="${eva.grating} == 3" >
+									★★★
+							</span>
+							<span th:if="${eva.grating} == 2" >
+									★★
+							</span>
+							<span th:if="${eva.grating} == 1" >
+									★
+							</span>
+            </p>
+            <p>
+						<span style="color: black;">
+							<span th:text="${eva.goodsEva}"></span>
+						</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

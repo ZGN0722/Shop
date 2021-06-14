@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户评价页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<body>
+<br><br><br>
+<div class="container">
+    <div class="bg-primary"  style="width:70%; height: 60px;padding-top: 0.5px;">
+        <h3 align="center">评价界面</h3>
+    </div><br>
+    <form th:action="@{/user/evaluation}"
+          name="myform" method="post"
+          class="form-horizontal"
+          enctype="multipart/form-data" >
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">商家名称</label>
+            <div class="col-sm-4 col-md-4">
+                <input type="text" class="form-control"
+                       readonly="readonly" th:value="${storeInfo.sname}"/>
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">店家服务</label>
+            <div class="col-sm-4 col-md-4">
+                <select name="srating" style="color: yellow;">
+                    <option value="1" >★</option>
+                    <option value="2" >★★</option>
+                    <option value="3" >★★★</option>
+                    <option value="4" >★★★★</option>
+                    <option value="5" >★★★★★</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">评价语</label>
+            <div class="col-sm-4 col-md-4">
+                <input type="text" class="form-control"
+                       name="storeEva"/>
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">商品名称</label>
+            <div class="col-sm-4 col-md-4">
+                <input type="text" class="form-control"
+                       readonly="readonly" th:value="${storeInfo.gname}"/>
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">评价</label>
+            <div class="col-sm-4 col-md-4">
+                <select name="grating" style="color: yellow;">
+                    <option value="1" >★</option>
+                    <option value="2" >★★</option>
+                    <option value="3" >★★★</option>
+                    <option value="4" >★★★★</option>
+                    <option value="5" >★★★★★</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label class="col-sm-2 col-md-2 control-label">评价语</label>
+            <div class="col-sm-4 col-md-4">
+                <input type="text" class="form-control" name="goodsEva"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit"class="btn btn-success" >提交</button>
+                <button type="reset" class="btn btn-primary" >重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

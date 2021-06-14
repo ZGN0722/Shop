@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<base th:href="@{/}"><!-- 不用base就使用th:src="@{/js/jquery.min.js} -->
+<meta charset="UTF-8">
+<title>用户信息页面</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<script type="text/javascript" th:inline="javascript">
+		function reCharge(){
+				alert("已发起充值请求，等待管理员处理");
+			document.myform.submit();
+		}
+	</script>
+<body>
+	<div class="container">
+	<div class="bg-primary"  style="width:100%; height: 70px;padding-top: 10px;">
+	       <h2 align="center">用户信息</h2>
+	   </div>
+		<br><br>
+		<form action="cart/updateUpwd" name="myform" method="post" class="form-horizontal" role="form" >
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">用户名</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" readonly="readonly" name="login_name" th:value="${session.bUser.login_name}" />
+				</div>
+			</div>	
+			<div class="form-group has-success">
+				  <label class="col-sm-2 col-md-2 control-label">密码</label>
+				  <div class="col-sm-4 col-md-4">
+		  				<input type="text" class="form-control" name="bpwd"  th:value="${session.bUser.bpwd}" placeholder="请输入您的新密码" />
+				  </div>
+			 </div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">姓名</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" name="user_name" th:value="${session.bUser.user_name}" placeholder="请输入您的姓名" />
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">性别</label>
+				<div class="col-sm-4 col-md-4">
+					<!--
+					<input type="text" class="form-control" name="gender" th:value="${session.bUser.gender}" placeholder="请输入您的性别" />
+					-->
+					<select name="gender" >
+						<option value="1" th:selected="${session.genderM}">男</option>
+						<option value="0" th:selected="${session.genderW}">女</option>
+					</select>
+					</label>
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">电话号码</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" name="mobile" th:value="${session.bUser.mobile}" placeholder="请输入您的新电话号码" />
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">银行卡号</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" name="credit_card" th:value="${session.bUser.credit_card}" placeholder="请输入您的银行卡号" />
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">邮箱</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" name="email" th:value="${session.bUser.email}" placeholder="请输入您的新邮箱" />
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">钱包</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" readonly="readonly" name="wallet" th:value="${session.bUser.wallet}"  />
+					<a href="user/recharge" onclick="reCharge()">充值</a>
+				</div>
+			</div>
+			<div class="form-group has-success">
+				<label class="col-sm-2 col-md-2 control-label">积分</label>
+				<div class="col-sm-4 col-md-4">
+					<input type="text" class="form-control" readonly="readonly" name="score" th:value="${session.bUser.score}" placeholder="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit"class="btn btn-success" >修改</button>
+					<button type="reset" class="btn btn-primary" >重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
